@@ -3,8 +3,8 @@
 ## Module 1 — TypeScript essentials
 
 - [x] Group tickets by status
-- [ ] Count tickets by priority (current)
-- [ ] Deduplicate events by ID
+- [x] Count tickets by priority
+- [ ] Deduplicate events by ID (current)
 - [ ] Find the latest event for each ID
 - [ ] Transform and validate a list of records
 
