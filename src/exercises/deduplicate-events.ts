@@ -22,6 +22,37 @@ export class InvalidEventInputError extends Error {
  * - type is not a non-empty string.
  */
 export function deduplicateEvents(input: unknown): TicketEvent[] {
-  // TODO: validate the input and deduplicate the events.
-  throw new Error("Not implemented");
+  if(!Array.isArray(input)){
+    throw new InvalidEventInputError("input must be a array")
+  }
+  for(const element of input){
+    if(element === null){
+      throw new InvalidEventInputError("item must be a non-null object")
+    }
+    if(element.id.length === 0 || typeof element.id !== "string"){
+      throw new InvalidEventInputError("id should be a non-empty string")
+    }
+    if(element.type.length === 0 || typeof element.type !== "string"){
+      throw new InvalidEventInputError("type should be a non-empty string")
+    }
+  }
+  const dediplicatedEvents: TicketEvent[]=[]
+  // let eventMap = new Map()
+  // for(const event of input){
+  //   let element = eventMap.get(event.id)
+  //   if(element === undefined){
+  //     eventMap.set(event.id, event)
+  //     dediplicatedEvents.push(event)
+  //   }
+  // }
+  // return dediplicatedEvents
+  let eventSet = new Set<string>()
+  for(const event of input){
+    let element = eventSet.has(event.id)
+    if(!element){
+      eventSet.add(event.id)
+      dediplicatedEvents.push(event)
+    }
+  }
+  return dediplicatedEvents
 }
